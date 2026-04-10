@@ -1,19 +1,69 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="sa">
 <head>
     <meta charset="UTF-8">
-    <title>Mero Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raghuvamsha Mahakavya</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background-color: #f4f4f4; }
-        .container { margin-top: 50px; background: white; padding: 20px; display: inline-block; border-radius: 10px; shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #333; }
-        p { color: #666; }
+        body { font-family: 'Sanskrit', 'Arial', sans-serif; background-color: #fdf6e3; color: #5d4037; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #d32f2f; }
+        h1, h2 { text-align: center; color: #b71c1c; }
+        .shloka { background: #fff3e0; padding: 20px; border-left: 5px solid #ff9800; font-size: 1.2rem; text-align: center; margin-bottom: 20px; font-weight: bold; }
+        
+        /* Tab Styles */
+        .tabs { display: flex; cursor: pointer; background: #eee; border-radius: 5px; overflow: hidden; margin-bottom: 10px; }
+        .tab { flex: 1; padding: 10px; text-align: center; transition: 0.3s; font-weight: bold; border-right: 1px solid #ccc; }
+        .tab:last-child { border-right: none; }
+        .tab.active { background: #d32f2f; color: white; }
+        
+        .content { display: none; padding: 20px; border: 1px solid #eee; border-radius: 5px; background: #fafafa; min-height: 100px; }
+        .content.active { display: block; }
+        .footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: #888; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Namaste! Mero Website ma Swagat Chha.</h1>
-        <p>Yo website GitHub Pages bata banaiyeko ho.</p>
+
+<div class="container">
+    <h1>रघुवंश महाकाव्यम्</h1>
+    <h2>प्रथमः सर्गः (श्लोक १)</h2>
+
+    <div class="shloka">
+        वागर्थाविव सम्पृक्तौ वागर्थप्रतिपत्तये ।<br>
+        जगतः पितरौ वन्दे पार्वतीपरमेश्वरौ ॥ १ ॥
     </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="openTab(event, 'sanjeevani')">Sanjeevani</div>
+        <div class="tab" onclick="openTab(event, 'prakashika')">Prakashika</div>
+        <div class="tab" onclick="openTab(event, 'nepali')">Nepali Meaning</div>
+    </div>
+
+    <div id="sanjeevani" class="content active">
+        <strong>Mallinatha Suri:</strong> वागर्थाविव। वाक् च अर्थश्च वागर्थौ। तयोरिव नित्यसम्बद्धौ...
+    </div>
+
+    <div id="prakashika" class="content">
+        <strong>Prakashika:</strong> अत्र पार्वतीपरमेश्वरौ जगत्पितरौ वन्दते। वागर्थप्रतिपत्तये इति प्रयोजनम्...
+    </div>
+
+    <div id="nepali" class="content">
+        <strong>नेपाली भावार्थ:</strong> शब्द र अर्थ जस्तै मिलेका, संसारका मातापिता पार्वती र शिवलाई म शब्द र अर्थको ज्ञानको लागि प्रणाम गर्दछु।
+    </div>
+
+    <div class="footer">Created for Shree Durga Vaidik Sanskrit Bidyapeeth</div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, content, tabs;
+        content = document.getElementsByClassName("content");
+        for (i = 0; i < content.length; i++) { content[i].style.display = "none"; content[i].classList.remove("active"); }
+        tabs = document.getElementsByClassName("tab");
+        for (i = 0; i < tabs.length; i++) { tabs[i].classList.remove("active"); }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
 </body>
 </html>
