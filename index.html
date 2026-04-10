@@ -3,63 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raghuvamsha Mahakavya</title>
-    
+    <title>Raghuvamsha Digital Library</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap');
 
-        body {
-            font-family: 'Mukta', sans-serif;
-            background-color: #f8f1e7;
-            color: #2c3e50;
-            margin: 0;
-            padding: 15px;
-        }
+        body { font-family: 'Mukta', sans-serif; background-color: #f4ece1; margin: 0; padding: 10px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); border-top: 10px solid #b71c1c; }
+        
+        /* Search & Filter Section */
+        .controls { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; background: #fff3e0; padding: 15px; border-radius: 10px; }
+        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; flex: 1; min-width: 150px; }
 
-        .container {
-            max-width: 850px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 10px solid #b71c1c;
-        }
+        h1 { text-align: center; color: #b71c1c; margin-top: 0; }
+        
+        .shloka-card { border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 30px; background: #fff; }
+        .shloka-header { font-weight: bold; color: #777; margin-bottom: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .shloka-text { font-size: 1.4rem; color: #d32f2f; text-align: center; margin: 20px 0; font-weight: bold; line-height: 1.8; }
 
-        h1 { font-size: 2.2rem; color: #b71c1c; text-align: center; margin-bottom: 5px; }
-        h2 { font-size: 1.2rem; color: #555; text-align: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        /* Tabs Design */
+        .tabs { display: flex; gap: 5px; background: #f0f0f0; padding: 5px; border-radius: 8px; }
+        .tab { flex: 1; padding: 8px; text-align: center; cursor: pointer; font-weight: bold; border-radius: 5px; transition: 0.3s; font-size: 0.9rem; }
+        .tab.active { background: #b71c1c; color: white; }
+        
+        .content { display: none; padding: 15px; border: 1px solid #f0f0f0; margin-top: 10px; border-radius: 8px; background: #fafafa; min-height: 80px; }
+        .content.active { display: block; animation: fadeIn 0.4s; }
 
-        .shloka-card {
-            background: #fffcf5;
-            border: 1px solid #f0e0d0;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
 
-        .shloka-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #d32f2f;
-            text-align: center;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
+<div class="container">
+    <h1>रघुवंश महाकाव्यम्</h1>
+    
+    <div class="controls">
+        <select id="sargaFilter" onchange="filterShloka()">
+            <option value="all">सबै सर्ग (All Sargas)</option>
+            <option value="1">प्रथमः सर्गः (Sarga 1)</option>
+            <option value="2">द्वितीयः सर्गः (Sarga 2)</option>
+        </select>
+        <input type="text" id="shlokaSearch" placeholder="श्लोक खोज्नुहोस् (Search Shloka...)" onkeyup="filterShloka()">
+    </div>
 
-        .tabs-container {
-            display: flex;
-            background: #f1f1f1;
-            border-radius: 12px;
-            padding: 5px;
-            margin-top: 15px;
-        }
+    <div class="shloka-card" data-sarga="1" data-keywords="vagartha parvati parmeshwar">
+        <div class="shloka-header"><span>सर्ग १</span> <span>श्लोक १</span></div>
+        <div class="shloka-text">
+            वागर्थाविव सम्पृक्तौ वागर्थप्रतिपत्तये ।<br>
+            जगतः पितरौ वन्दे पार्वतीपरमेश्वरौ ॥ १ ॥
+        </div>
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 's1t1')">सञ्जीवनी</div>
+            <div class="tab" onclick="openTab(event, 's1t2')">प्रकाशिका</div>
+            <div class="tab" onclick="openTab(event, 's1t3')">नेपाली</div>
+        </div>
+        <div id="s1t1" class="content active"><strong>मल्लिनाथ:</strong> वागर्थाविव। वाक् च अर्थश्च वागर्थौ...</div>
+        <div id="s1t2" class="content"><strong>प्रकाशिका:</strong> अत्र शिवपार्वत्योः वन्दनम्...</div>
+        <div id="s1t3" class="content"><strong>नेपाली:</strong> पार्वती र परमेश्वरलाई वन्दना गर्दछु...</div>
+    </div>
 
-        .tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 8px;
+    <div class="shloka-card" data-sarga="1" data-keywords="sudakshina dilip bharya">
+        <div class="shloka-header"><span>सर्ग १</span> <span>श्लोक २</span></div>
+        <div class="shloka-text">
+            तस्य आसीत् दयिता भार्या सुदक्षिणा इति नामतः ।<br>
+            मखस्य इव दक्षिणा साक्षात् शुद्धवंश्या सुदक्षिणा ॥ २ ॥
+        </div>
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 's2t1')">सञ्जीवनी</div>
+            <div class="tab" onclick="openTab(event, 's2t2')">प्रकाशिका</div>
+            <div class="tab" onclick="openTab(event, 's2t3')">नेपाली</div>
+        </div>
+        <div id="s2t1" class="content active"><strong>मल्लिनाथ:</strong> तस्य राज्ञः सुदक्षिणा...</div>
+        <div id="s2t2" class="content"><strong>प्रकाशिका:</strong> सुदक्षिणायाः वर्णनम्...</div>
+        <div id="s2t3" class="content"><strong>नेपाली:</strong> उनकी सुदक्षिणा नामकी पत्नी थिइन्...</div>
+    </div>
+
+</div>
+
+<script>
+    function openTab(evt, tabId) {
+        let card = evt.currentTarget.closest('.shloka-card');
+        card.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        card.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        evt.currentTarget.classList.add('active');
+    }
+
+    function filterShloka() {
+        let sarga = document.getElementById('sargaFilter').value;
+        let search = document.getElementById('shlokaSearch').value.toLowerCase();
+        let cards = document.querySelectorAll('.shloka-card');
+
+        cards.forEach(card => {
+            let cardSarga = card.getAttribute('data-sarga');
+            let keywords = card.getAttribute('data-keywords');
+            let text = card.querySelector('.shloka-text').innerText.toLowerCase();
+
+            let matchesSarga = (sarga === 'all' || sarga === cardSarga);
+            let matchesSearch = (text.includes(search) || keywords.includes(search));
+
+            if (matchesSarga && matchesSearch) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
             font-weight: bold;
             transition: 0.3s;
             font-size: 0.95rem;
