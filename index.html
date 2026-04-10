@@ -4,36 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raghuvamsha Mahakavya</title>
+    
     <style>
-        body { font-family: 'Sanskrit', 'Arial', sans-serif; background-color: #fdf6e3; color: #5d4037; line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #d32f2f; }
-        h1, h2 { text-align: center; color: #b71c1c; }
-        .shloka { background: #fff3e0; padding: 20px; border-left: 5px solid #ff9800; font-size: 1.2rem; text-align: center; margin-bottom: 20px; font-weight: bold; }
-        
-        /* Tab Styles */
-        .tabs { display: flex; cursor: pointer; background: #eee; border-radius: 5px; overflow: hidden; margin-bottom: 10px; }
-        .tab { flex: 1; padding: 10px; text-align: center; transition: 0.3s; font-weight: bold; border-right: 1px solid #ccc; }
-        .tab:last-child { border-right: none; }
-        .tab.active { background: #d32f2f; color: white; }
-        
-        .content { display: none; padding: 20px; border: 1px solid #eee; border-radius: 5px; background: #fafafa; min-height: 100px; }
-        .content.active { display: block; }
-        .footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: #888; }
+        @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Mukta', sans-serif;
+            background-color: #f8f1e7;
+            color: #2c3e50;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 10px solid #b71c1c;
+        }
+
+        h1 { font-size: 2.2rem; color: #b71c1c; text-align: center; margin-bottom: 5px; }
+        h2 { font-size: 1.2rem; color: #555; text-align: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+        .shloka-card {
+            background: #fffcf5;
+            border: 1px solid #f0e0d0;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .shloka-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d32f2f;
+            text-align: center;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .tabs-container {
+            display: flex;
+            background: #f1f1f1;
+            border-radius: 12px;
+            padding: 5px;
+            margin-top: 15px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .tab.active {
+            background: #b71c1c;
+            color: white;
+        }
+
+        .content-box {
+            display: none;
+            padding: 20px;
+            margin-top: 10px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px dashed #ccc;
+        }
+
+        .content-box.active {
+            display: block;
+        }
+
+        .footer { text-align: center; margin-top: 40px; font-size: 0.9rem; color: #777; }
+
+        @media (max-width: 600px) {
+            .tabs-container { flex-direction: column; }
+            .tab { margin-bottom: 5px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>रघुवंश महाकाव्यम्</h1>
-    <h2>प्रथमः सर्गः (श्लोक १)</h2>
+    <h2>कालिदास विरचितम्</h2>
 
-    <div class="shloka">
-        वागर्थाविव सम्पृक्तौ वागर्थप्रतिपत्तये ।<br>
-        जगतः पितरौ वन्दे पार्वतीपरमेश्वरौ ॥ १ ॥
+    <div class="shloka-card">
+        <div class="shloka-text">
+            वागर्थाविव सम्पृक्तौ वागर्थप्रतिपत्तये ।<br>
+            जगतः पितरौ वन्दे पार्वतीपरमेश्वरौ ॥ १ ॥
+        </div>
+
+        <div class="tabs-container">
+            <div class="tab active" onclick="openTab(event, 's1_t1')">सञ्जीवनी</div>
+            <div class="tab" onclick="openTab(event, 's1_t2')">प्रकाशिका</div>
+            <div class="tab" onclick="openTab(event, 's1_t3')">नेपाली अर्थ</div>
+        </div>
+
+        <div id="s1_t1" class="content-box active">
+            <strong>मल्लिनाथ:</strong> वागर्थाविव। वाक् च अर्थश्च वागर्थौ। तयोरिव नित्यसम्बद्धौ...
+        </div>
+        <div id="s1_t2" class="content-box">
+            <strong>प्रकाशिका:</strong> अत्र पार्वतीपरमेश्वरौ जगत्पितरौ वन्दते।
+        </div>
+        <div id="s1_t3" class="content-box">
+            <strong>भावार्थ:</strong> शब्द र अर्थ जस्तै मिलेका पार्वती र परमेश्वरलाई ढोग्दछु।
+        </div>
     </div>
 
-    <div class="tabs">
-        <div class="tab active" onclick="openTab(event, 'sanjeevani')">Sanjeevani</div>
+    <div class="footer">Created for Shree Durga Vaidik Sanskrit Bidyapeeth</div>
+</div>
+
+<script>
+    function openTab(evt, tabId) {
+        var i, content, tabs;
+        
+        // Find the parent card of the clicked tab
+        var card = evt.currentTarget.closest('.shloka-card');
+        
+        // Hide all content boxes inside THIS card
+        content = card.getElementsByClassName("content-box");
+        for (i = 0; i < content.length; i++) {
+            content[i].classList.remove("active");
+        }
+
+        // Remove active class from all tabs inside THIS card
+        tabs = card.getElementsByClassName("tab");
+        for (i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove("active");
+        }
+
+        // Show the specific tab and mark it active
+        document.getElementById(tabId).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
         <div class="tab" onclick="openTab(event, 'prakashika')">Prakashika</div>
         <div class="tab" onclick="openTab(event, 'nepali')">Nepali Meaning</div>
     </div>
